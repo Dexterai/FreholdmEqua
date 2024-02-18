@@ -1,6 +1,77 @@
 #include "Spline2D.h"
+#include "GaussNodes.h"
 
-LarangePoly2D::LarangePoly2D()
+
+double LarangePoly2D::fundPoly(const array_1d& g, double x, size_t k) const
 {
+    double tmp = 1.0;
+    for (size_t i = 0; i < g.size(); ++i)
+    {
+        if (i == k) continue;
+        tmp *= (x - g[i]) / (g[k] - g[i]);
+    }
+    return tmp;
+}
 
+const Spline2D& Spline2D::operator=(const Spline2D& spl)
+{
+    if (this == &spl) return *this;
+    _copy(spl);
+    return *this;
+}
+
+Spline2D::~Spline2D()
+{
+    for (size_t i = 0; i < polys.row(); i++)
+    {
+        for (size_t j = 0; j < polys.col(); j++)
+        {
+            delete polys[i][j];
+        }
+    }
+}
+
+void Spline2D::_copy(const Spline2D& spl)
+{
+    xgrid = spl.xgrid;
+    ygrid = spl.ygrid;
+
+    const array_2p& tmpPolys = spl.polys;
+    polys = array_2p(tmpPolys.row(), tmpPolys.col());
+
+    for (size_t i = 0; i < tmpPolys.row(); i++)
+    {
+        for (size_t j = 0; j < tmpPolys.col(); j++)
+        {
+            polys[i][j] = new LarangePoly2D(*tmpPolys[i][j]);
+        }
+    }
+}
+
+void setupGaussGrid(LarangePoly2D &poly, const double xval[2], const double yval[2], GaussGdType gtype)
+{
+    size_t gsize = (size_t)gtype;
+    array_1d xnodes(gsize);
+    array_1d ynodes(gsize);
+
+    GaussNodes gNodes(gtype);
+    const double* gnodes = gNodes.getGnode();
+    for (size_t i = 0; i < gsize; ++i)
+    {
+        xnodes[i] = (xval[0] + xval[1]) / 2 + (xval[1] - xval[0]) / 2 * gnodes[i];
+        ynodes[i] = (yval[0] + yval[1]) / 2 + (yval[1] - yval[0]) / 2 * gnodes[i];
+    }
+
+    poly.setxNodes(xnodes);
+    poly.setyNodes(ynodes);
+}
+
+void createGaussSpline2D( size_t xnum, size_t ynum, GaussGdType gtype)
+{
+    array_1d xnodes(xnum);
+    array_1d ynodes(ynum);
+
+    double xstep = ()
+
+    for(size_t i = 0; )
 }

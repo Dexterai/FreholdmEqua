@@ -7,18 +7,18 @@ template<class T> class valarray_2d
 public:
 
 	valarray_2d() {}
-	valarray_2d(size_t raw, size_t col) 
-		: std::valarray<std::valarray<T>>(raw)
+	valarray_2d(size_t row, size_t col) 
+		: std::valarray<std::valarray<T>>(row)
 	{
-		for (size_t i = 0; i < raw; ++i)
+		for (size_t i = 0; i < row; ++i)
 		{
 			(*this)[i].resize(col);
 		}
 	}
 	~valarray_2d() {}
 
-	size_t raw() { return this->size(); }
-	size_t col() { return (*this)[0].size(); }
+	size_t row() const { return this->size(); }
+	size_t col() const { return (*this)[0].size(); }
 };
 
 typedef std::valarray<double> array_1d;
