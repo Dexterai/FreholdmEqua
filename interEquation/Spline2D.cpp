@@ -66,12 +66,40 @@ void setupGaussGrid(LarangePoly2D &poly, const double xval[2], const double yval
     poly.setyNodes(ynodes);
 }
 
-void createGaussSpline2D( size_t xnum, size_t ynum, GaussGdType gtype)
+//xval[2]代表网格x的两个边，yval[2]代表网格y的两个边， 
+Spline2D createGaussSpline2D(const double xval[2], const double yval[2], size_t xnum, size_t ynum, GaussGdType gtype)
 {
     array_1d xnodes(xnum);
     array_1d ynodes(ynum);
 
-    double xstep = ()
+    double xstep = (xval[1] - xval[0]) / (xnum - 1);
+    double ystep = (yval[1] - yval[0]) / (ynum - 1);
 
-    for(size_t i = 0; )
+    for (size_t i = 0; i < xnum; ++i)
+    {
+        xnodes[i] = xval[0] + i * xstep;
+    }
+
+    for (size_t j = 0; j < ynum; ++j)
+    {
+        ynodes[j] = yval[0] + j * ystep;
+    }
+
+    Spline2D::array_2p polyArray(xnum - 1, ynum - 1);
+
+    for (size_t i = 0; i < xnum - 1; ++i)
+    {
+        double xr[2] = { xnodes[i], xnodes[i + 1] };
+        for (size_t j = 0; j < ynum - 1; ++j)
+        {
+            double yr[2] = { ynodes[j], ynodes[j + 1] };
+
+            LarangePoly2D* coply = new LarangePoly2D();
+
+            setupGaussGrid(*coply, xr, yr, gtype);
+            polyArray[i][j] = coply;
+        }
+    }
+
+    return Spline2D(xnodes, ynodes, polyArray);
 }
