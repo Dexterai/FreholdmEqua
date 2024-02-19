@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="solver.cpp">
+    <ClCompile Include="FE2Dsolver.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GaussNodes.cpp">
@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="solver.h">
+    <ClInclude Include="FE2Dsolver.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Spline2D.h">
@@ -39,6 +39,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LASolver.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

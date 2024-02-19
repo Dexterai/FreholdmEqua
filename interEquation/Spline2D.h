@@ -15,6 +15,8 @@ public:
 		:xnodes(_xnode), ynodes(_ynode), values(_values) {}
 	~LarangePoly2D() {};
 
+
+
 	const array_1d getxNodes()
 	{
 		return xnodes;
@@ -76,9 +78,17 @@ public:
 	{
 		_copy(spl);
 	}
+
+	~Spline2D();
+
 	const Spline2D& operator=(const Spline2D& spl);
 	
-	~Spline2D();
+	double operator()(double x, double y) const;
+
+	array_2p& getPolys() 
+	{
+		return polys;
+	}
 
 private:
 
@@ -89,4 +99,11 @@ private:
 	//多项式数组
 	array_2p polys;
 };
+
+Spline2D createGaussSpline2D(
+	const double xval[2],  //x区边界
+	const double yval[2],  //y区边界
+	size_t xnum,           //变量x的个数
+	size_t ynum,           //变量y的个数
+	GaussGdType gtype);    //高斯节点的个数
 
