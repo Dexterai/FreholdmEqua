@@ -130,13 +130,14 @@
   <ItemGroup>
     <ClCompile Include="GaussNodes.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="solver.cpp" />
+    <ClCompile Include="FE2Dsolver.cpp" />
     <ClCompile Include="Spline2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
     <ClInclude Include="GaussNodes.h" />
-    <ClInclude Include="solver.h" />
+    <ClInclude Include="LASolver.h" />
+    <ClInclude Include="FE2Dsolver.h" />
     <ClInclude Include="Spline2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
